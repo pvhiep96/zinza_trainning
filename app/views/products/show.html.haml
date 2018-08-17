@@ -1,0 +1,25 @@
+.container.text-center
+	.col-lg-11
+		%p#notice notice
+		%table.table.table-striped
+			%p
+				%strong Name
+				= @product.name
+			%p
+				%strong Category
+				= @product.category.name
+			%p
+				%strong Price
+				= @product.price
+			%p
+				%strong Quantity
+				- if @product.quantity == 0 
+					0
+				- else
+					= @product.quantity
+			%p 
+				- @product.pictures.each do |picture|
+					.images_pro
+						= image_tag picture.picture_url
+		= link_to 'Edit', edit_product_path(@product)
+		= link_to 'Back', products_path

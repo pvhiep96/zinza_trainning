@@ -1,0 +1,39 @@
+.container.text-center
+  .row
+    %h1 Your Cart
+    %br/
+    %br/
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{:style => "text-align:center"} Name
+          %th{:style => "text-align:center"} Quantity
+          %th{:style => "text-align:center"} Price
+          %th{:style => "text-align:center"} Total detail
+          %th{:colspan => "3"}
+      %tbody
+        - @order.order_details.each do |order|
+          %tr
+            %td= order.name
+            -# %td= order.quantity
+            %td 
+              = form_for OrderDetail.new,:url => quantity_path(order), remote: true do |orders_details|
+                = orders_details.hidden_field :product_id, value: order.id
+                = orders_details.hidden_field :price, value: order.price
+                = orders_details.hidden_field :name, value: order.name
+                = orders_details.number_field :quantity, value: order.quantity
+                = orders_details.submit 'update', class: 'btn btn-primary', id: 'update'
+            %td
+              #price= order.price
+
+            %td= button_to 'remove', order, :method => :delete,data: {:confirm => 'Are you sure?'}, class: 'btn btn-primary'
+    .cart
+      .col-md-12.price#total_price
+        TOTAL: #{@order.total_price}
+      .col-md-6.success
+        \#{button_to 'Checkout', order_checkout_path(@order), method: :post, class: 'btn btn-success'}
+      .col-md-6
+        \#{button_to 'Empty cart', @order, :method => :delete,data: {:confirm => 'Are you sure?'}, class: 'btn btn-danger'}
+      
+      
+
