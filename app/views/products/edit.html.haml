@@ -1,0 +1,43 @@
+.container
+	.row
+		%h1 Product edit
+		= nested_form_for @product do |f|
+			= render "shared/error_message", object: f.object
+			= f.label :category
+			%br/
+			= f.collection_select :category_id, Category.all, :id, :name , prompt: 'Select one',class: 'btn btn-secondary dropdown-toogle'
+			%br/
+			= f.label :name
+			%br/
+			= f.text_field :name, class: 'form-control'
+			%br/
+			= f.label :price
+			%br/
+			= f.text_field :price, class: 'form-control'
+			%br/
+			= f.label :description
+			%br/
+			= f.text_field :description, class: 'form-control'
+			%br/
+			= f.label :quantity
+			%br/
+			= f.text_field :quantity, class: 'form-control'
+			%br/
+			= f.label :status
+			= f.check_box :status
+			%br/
+			.picture-form	
+				#sponsorship-levels-form
+					= f.fields_for :pictures do |ff|
+						= image_tag ff.object.picture_url
+						.images_pro
+							= ff.file_field :picture_url
+							.preview_image
+								.remove-sponsorship-level
+									= ff.link_to_remove do
+										%button.btn{type: 'button'} Remove picture
+			#add-sponsorship-level
+				= f.link_to_add :pictures, data: {taget: '.picture-form'} do
+					%button{type: 'button'} + Add another picture
+
+			= f.submit 'Edit product', class: 'btn btn-primary'

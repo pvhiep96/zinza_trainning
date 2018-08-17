@@ -1,0 +1,58 @@
+%p#notice= notice
+.container
+	.row
+		= form_tag(products_path, method: :get) do
+			= text_field_tag :name
+			= submit_tag 'Search'
+
+		%h1 Products
+		%br/
+		%br/
+		- if can? :new, @product_path
+			= link_to 'New Product', new_product_path, class: 'btn btn-primary'
+		
+		%table.table.table-striped
+			= link_to 'Oldest |' , products_path(sort_by: 'oldest')
+			= link_to 'Newest |' , products_path(sort_by: 'newest')
+			= link_to 'Name |' , products_path(sort_by: 'name')
+			= link_to 'Price |' , products_path(sort_by: 'price')
+			= link_to 'Quantity' , products_path(sort_by: 'quantity')
+
+			%thead
+				%tr
+					%th Name
+					%th Price
+					%th Description
+					%th Quantity
+					%th{:colspan => "3"}
+			%tbody
+				- @products.each do |product|
+					%tr
+						%td= product.name
+						%td= product.price
+						%td= product.description
+						%td
+							- if product.quantity == nil
+								0
+							- else 
+								= product.quantity
+						%td
+							%span.glyphicon.glyphicon-eye-open{"aria-hidden" => true}
+							%span.glyphicon-class= link_to 'Show', product
+						%td
+							- if can? :update, product
+								%span.glyphicon.glyphicon-pencil{"aria-hidden" => true}
+								%span.glyphicon-class= link_to 'Edit', edit_product_path(product)
+						%td
+							- if can? :destroy, product
+								%span.glyphicon.glyphicon-trash{"aria-hidden" => true}
+								%span.glyphicon.glyphicon-class= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?'}
+							.price_line
+								= form_for OrderDetail.new, remote: true do |orders_details|
+									= orders_details.hidden_field :name, value: product.name
+									= orders_details.hidden_field :price, value: product.price
+									= orders_details.hidden_field :product_id, value: product.id
+									= orders_details.submit 'Add to Cart', class: "btn btn-primary"
+									%span= orders_details.number_field :quantity, value: 1, class: "form-control", min: 1
+									%span.price= number_to_currency(product.price)
+		= paginate @products, theme: 'twitter-bootstrap-3'						

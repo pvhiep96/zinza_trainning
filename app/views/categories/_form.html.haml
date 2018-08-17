@@ -1,0 +1,9 @@
+= form_with(model: category, local: true) do |f|
+  = render "shared/error_message", object: f.object
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name, id: :category_name, class: 'form-control'
+  %br/
+  .actions
+    = f.submit "create category", class: 'btn btn-primary'

@@ -1,0 +1,16 @@
+.container.text-center
+  .row
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{:style => "text-align:center"} Date time
+          %th{:style => "text-align:center"} Total detail
+          %th{:style => "text-align:center"} Status
+          %th{:colspan => "3"}
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %td= order.created_at
+            %td= number_to_currency order.total_price
+            %td= order.status
+            %td= link_to "detail", order

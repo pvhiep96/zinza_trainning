@@ -1,0 +1,31 @@
+<div class="container text-center">
+  <div class="row">
+			<table class="table table-striped">
+			<thead>
+				<tr>
+				<th style="text-align:center">Name</th>
+				<th style="text-align:center">Quantity</th>
+				<th style="text-align:center">Price</th>
+				<th style="text-align:center">Total detail</th>					
+				<th colspan="3"></th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @order.order_details.each do |order| %>
+				<tr>
+					<td><%= order.name %></td>
+					<td><%= order.quantity %></td>
+					<td>
+					<%= order.price %>
+					</td>
+					<td><%= number_to_currency order.quantity * order.price %></td>
+					<td><%= button_to 'remove', order, :method => :delete,data: {:confirm => 'Are you sure?'} %></td>
+				</tr>
+			<% end %>
+		</tbody>
+		</table>
+		TOTAL: <%= @order.total_price%>
+		<%= button_to 'Empty cart', @order, :method => :delete,data: {:confirm => 'Are you sure?'} %> 
+		<%= button_to 'Checkout', order_checkout_path(@order), method: :post %><br>
+  </div>
+</div>

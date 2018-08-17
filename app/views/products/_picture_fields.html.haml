@@ -1,0 +1,7 @@
+%fieldset
+	= f.label :pictures 
+	= f.file_field :picture_url
+	.preview 
+		%img
+	= f.hidden_field :destroy
+	= link_to "remove", "#", class: 'remove_fields'	
