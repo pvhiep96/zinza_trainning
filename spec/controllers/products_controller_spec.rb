@@ -39,6 +39,7 @@ RSpec.describe ProductsController, type: :controller do
     it 'create order_id' do
       get :index
       expect(session['order_id']).to eq(Order.last.id)
+
     end
   end
 end
