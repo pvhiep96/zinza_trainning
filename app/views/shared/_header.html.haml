@@ -15,7 +15,7 @@
           - if user_signed_in?
             %li= link_to current_user.email, edit_user_registration_path
           - else
-            %li= link_to "Log in", new_user_session_path
+            %li= link_to t("login"), new_user_session_path
         %li= link_to "Categories", categories_path
         %li= link_to "Product",  products_path
       %ul.nav.navbar-nav.navbar-right
@@ -26,9 +26,11 @@
           #cart.cart-text
             - if user_signed_in?
               = render 'shared/cart_text', order: @order
+        %li= link_to "En", locale:"en"
+        %li= link_to "Vi", locale:"vi"
         %li
           %div
             - if user_signed_in?
-              = link_to "Log out", destroy_user_session_path, method: 'delete',class: "btn btn-link"
+              = link_to t("logout"), destroy_user_session_path, method: 'delete',class: "btn btn-link"
     / /.nav-collapse
   / /.container-fluid

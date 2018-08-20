@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
   def checkout
     @order = Order.find_by(id: params[:id])
     # TODO: validate truong hop ko tim thay order
+    @order.update_attribute(:total, @order.total_price)
     @order.checkout!
     session.delete 'order_id'
     NotifierMailer.order_received(@order).deliver

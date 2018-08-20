@@ -20,3 +20,7 @@ User.create!(name:  'Admin',
                password:              password,
                password_confirmation: password)
 end
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@gmail.com', password: '123456',
+                    password_confirmation: '123456')
+end
