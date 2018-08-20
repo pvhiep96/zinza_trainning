@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
     @categories = if params[:name]
                     Category.where('name LIKE ?', "%#{params[:name]}%")
                   else
-                    Category.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
+                    Category.page(params[:page]).per(20).order(created_at: :desc)
                   end
   end
 
