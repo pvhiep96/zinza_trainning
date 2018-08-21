@@ -30,9 +30,60 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  login: "Log in"
-  logut: "Log out"
+  # navbar
+  home: "Home"
+  login: "Login"
+  logout: "Log out"
+  category: "Categories"
+  product: "Product"
+  list_order: "List order"
+  item_in_cart: "Item in Cart"
+  # navbar
+  name: "Name"
+  price: "Price"
+  quantity: "Quantity"
+  show: "Show"
+  edit: "Edit"
+  back: "Back"
+  destroy: "Delete"
+  thank_for_shopping: "Thanks for shopping"
+  total_detail: "Total detail"
+  date_time: "Date time"
+  status: "Status"
+  add_picture: "Add picture"
+  add_another_picture: "Add another pictures"
+  remove: "Remove"
+  unit_price: "Unit price"
+  add_to_cart: "Add to cart"
+  oldest: "Oldest"
+  newest: "Newest"
+  search: "Search"
+  detail: "Detail"
+  create_product: "Create product"
+  edit_product: "Edit product"
+  create_category: "Create category"
+  edit_category: "Edit category"
+  update: "Update"
+  currently_waiting_confirmation: "Currently waiting confirmation for: "
+  leave_blank_if_you_don't_want_to_change_it: "leave blank if you don't want to change it"
+  characters_minimum: "character minimum"
+  current_password: "(we need your current password to confirm your changes)"
+  sign_up: "Sign up"
+  forgot_your_password?: "Forgot your password?"
+  didn't_receive_confirmation_instructions?: "Didn't receive confirmation instructions?"
+  didn't_receive_unlock_instructions?: "Didn't receive unlock instructions?"
+  image_size: "should be less than 5MB"
+  time:
+      formats:
+        long: "%Y-%m-%d %H:%M:%S"
+  helpers:
+    label:
+      category:
+        name: "Name"
   active_admin:
+    time:
+      formats:
+        long: "%Y-%m-%d %H:%M:%S"
     dashboard: Dashboard
     dashboard_welcome:
       welcome: "Welcome to Active Admin. This is the default dashboard page."

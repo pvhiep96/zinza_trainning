@@ -1,8 +1,17 @@
 ActiveAdmin.register Category do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
+  permit_params :name
+  controller do
+    def create
+      @category = current_user.categories.build(permitted_params[:category])
+      redirect_to admin_categories_path if @category.save
+    end
+  end
+  form do |f|
+    f.inputs 'New product' do
+      f.input :name
+    end
+    actions
+  end
   #
   # or
   #

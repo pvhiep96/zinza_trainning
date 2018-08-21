@@ -10,27 +10,29 @@
       %a.navbar-brand{:href => "http://localhost:3000/"} Project name
     #navbar.navbar-collapse.collapse
       %ul.nav.navbar-nav
-        %li= link_to "Home", root_path, class: "active"
+        %li= link_to t("home"), root_path, class: "active"
         %li
           - if user_signed_in?
-            %li= link_to current_user.email, edit_user_registration_path
+            %li= link_to current_user.name, edit_user_registration_path
           - else
             %li= link_to t("login"), new_user_session_path
-        %li= link_to "Categories", categories_path
-        %li= link_to "Product",  products_path
+        %li= link_to t("category"), categories_path
+        %li= link_to t("product"),  products_path
       %ul.nav.navbar-nav.navbar-right
         %li
           %div
-            = link_to "List cart", orders_path,class: "btn btn-link"
+            = link_to t("list_order"), orders_path,class: "btn btn-link"
         %li
           #cart.cart-text
             - if user_signed_in?
               = render 'shared/cart_text', order: @order
-        %li= link_to "En", locale:"en"
-        %li= link_to "Vi", locale:"vi"
         %li
           %div
             - if user_signed_in?
               = link_to t("logout"), destroy_user_session_path, method: 'delete',class: "btn btn-link"
+        %li
+          = link_to "En", locale:"en"
+        %li
+          = link_to "Vi", locale:"vi"
     / /.nav-collapse
   / /.container-fluid
