@@ -1,6 +1,6 @@
 .container
 	.row
-		%h1 Create Product
+		%h1= t("create_product")
 		= form_for @product do |f|
 			= render "shared/error_message", object: f.object
 			= f.label :category
@@ -19,7 +19,7 @@
 			%br/
 			= f.text_field :description, class: 'form-control'
 			%br/
-			= f.label :qauntity
+			= f.label :quantity
 			%br/
 			= f.text_field :quantity, class: 'form-control'
 			%br/
@@ -29,6 +29,6 @@
 			%br/
 			= f.fields_for :pictures do |builder|
 				= render 'picture_fields', f: builder
-			= link_to_add_fields 'Add picture', f, :pictures
+			= link_to_add_fields t('add_picture'), f, :pictures
 			%br/
-			= f.submit 'Create product', class: 'btn btn-primary'
+			= f.submit t('create_product'), class: 'btn btn-primary'

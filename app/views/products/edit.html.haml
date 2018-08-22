@@ -1,6 +1,6 @@
 .container
 	.row
-		%h1 Product edit
+		%h1= t("edit_product")
 		= nested_form_for @product do |f|
 			= render "shared/error_message", object: f.object
 			= f.label :category
@@ -35,9 +35,9 @@
 							.preview_image
 								.remove-sponsorship-level
 									= ff.link_to_remove do
-										%button.btn{type: 'button'} Remove picture
+										%button.btn{type: 'button'}= t("remove")
 			#add-sponsorship-level
 				= f.link_to_add :pictures, data: {taget: '.picture-form'} do
-					%button{type: 'button'} + Add another picture
+					%button{type: 'button'}= "+" + t("add_another_picture")
 
-			= f.submit 'Edit product', class: 'btn btn-primary'
+			= f.submit t('edit'), class: 'btn btn-primary'

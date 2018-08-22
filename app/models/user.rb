@@ -1,13 +1,18 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   has_many :categories
   has_many :products
   has_many :pictures
   has_many :orders
   validates_presence_of :password, :email
-
+  validate :picture_size
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
+
+  def picture_size
+    errors.add(:avatar, t('image_size')) if avatar.size > 5.megabytes
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|

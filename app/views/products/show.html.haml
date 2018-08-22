@@ -1,18 +1,17 @@
 .container.text-center
 	.col-lg-11
-		%p#notice notice
 		%table.table.table-striped
 			%p
-				%strong Name
+				%strong= t("name")
 				= @product.name
 			%p
-				%strong Category
+				%strong= t("category")
 				= @product.category.name
 			%p
-				%strong Price
+				%strong= t("price")
 				= @product.price
 			%p
-				%strong Quantity
+				%strong= t("quantity")
 				- if @product.quantity == 0 
 					0
 				- else
@@ -21,5 +20,5 @@
 				- @product.pictures.each do |picture|
 					.images_pro
 						= image_tag picture.picture_url
-		= link_to 'Edit', edit_product_path(@product)
-		= link_to 'Back', products_path
+		= link_to t('edit') + "|", edit_product_path(@product)
+		= link_to t('back'), products_path

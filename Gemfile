@@ -4,8 +4,6 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
-
-# gem 'rcov', '~> 1.0'
 gem 'activeadmin'
 gem 'bootstrap-kaminari-views'
 gem 'bootstrap-sass', '~> 3.3.7'
@@ -20,6 +18,7 @@ gem 'html2haml'
 gem 'i18n', '~> 0.7.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'kaminari'
+gem 'mini_magick'
 gem 'nested_form'
 gem 'omniauth'
 gem 'omniauth-facebook'

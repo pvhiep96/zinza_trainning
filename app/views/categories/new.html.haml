@@ -1,5 +1,5 @@
 .container
   .row
-    %h1 New Category
+    %h1= t("create_category")
     = render 'form', category: @category
     = link_to 'Back', categories_path

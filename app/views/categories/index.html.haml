@@ -3,14 +3,14 @@
   .row
     = form_tag(categories_path, method: :get) do
       = text_field_tag :name
-      = submit_tag 'Search'
-    %h1 Categories
+      = submit_tag t('search')
+    %h1= t("category")
     - if can? :new, @products
-      = link_to 'New Category', new_category_path , class: 'btn btn-primary'
+      = link_to t('create_category'), new_category_path , class: 'btn btn-primary'
     %table.table.table-striped
       %thead
         %tr
-          %th Name
+          %th= t('name')
           %th{:colspan => "3"}
       %tbody
         - @categories.each do |category|
@@ -18,13 +18,13 @@
             %td= category.name
             %td
               %span.glyphicon.glyphicon-eye-open{"aria-hidden" => "true"}
-              %span.glyphicon-class= link_to 'Show', category
+              %span.glyphicon-class= link_to t('show'), category
             %td
               - if can? :update, category
                 %span.glyphicon.glyphicon-pencil{"aria-hidden" => "true"}
-                %span.glyphicon-class= link_to "Edit", edit_category_path(category)
+                %span.glyphicon-class= link_to t('edit'), edit_category_path(category)
             %td
               - if can? :destroy, category
                 %span.glyphicon.glyphicon-trash{"aria-hidden" => "true"}
-                %span.glyphicon-class= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+                %span.glyphicon-class= link_to t('destroy'), category, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
