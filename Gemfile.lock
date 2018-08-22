@@ -398,6 +398,7 @@ DEPENDENCIES
   pundit
   rails (~> 5.1.6)
   rails-controller-testing
+  ransack
   rspec-rails (~> 3.7)
   rubocop
   sass-rails (~> 5.0)

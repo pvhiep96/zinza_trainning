@@ -10,17 +10,17 @@ class Product < ApplicationRecord
   validates :quantity, presence: true
   validates :category_id, presence: true
 
-  def self.order_list(sort_order)
-    if sort_order == 'newest' || sort_order.blank?
-      order(created_at: :desc)
-    elsif sort_order == 'name'
-      order(name: :asc)
-    elsif sort_order == 'price'
-      order(price: :desc)
-    elsif sort_order == 'quantity'
-      order(quantity: :desc)
-    else
-      order(created_at: :asc)
-    end
-  end
+  # def self.order_list(sort_order)
+  #   if sort_order == 'newest' || sort_order.blank?
+  #     order(created_at: :desc)
+  #   elsif sort_order == 'name'
+  #     order(name: :asc)
+  #   elsif sort_order == 'price'
+  #     order(price: :desc)
+  #   elsif sort_order == 'quantity'
+  #     order(quantity: :desc)
+  #   else
+  #     order(created_at: :asc)
+  #   end
+  # end
 end

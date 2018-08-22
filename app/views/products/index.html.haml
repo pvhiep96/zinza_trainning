@@ -1,9 +1,19 @@
 .container
 	.row
-		= form_tag(products_path, method: :get) do
-			= text_field_tag :name
-			= submit_tag t('search')
-
+		-# = search_form_for @search, class: "col-md-12" do |f|
+		-# 	.form-group.col-md-2
+		-# 		= f.text_field :name_cont, placeholder: "enter name", class: "form-control"
+		-# 	.form-group.col-md2
+		-# 		= f.submit "search", class: "btn btn-primary"
+		= search_form_for @search, class: "col-md-12" do |f|
+			= f.condition_fields do |c|
+				.field
+					= c.attribute_fields do |a|
+						= a.attribute_select associations: [:category]
+					= c.predicate_select
+					= c.value_fields do |v|
+						= v.text_field :value
+			.actions= f.submit "Search", class: "btn btn-primary"
 		%h1= t("create_product")
 		%br/
 		%br/
@@ -11,22 +21,18 @@
 			= link_to t("create_product"), new_product_path, class: 'btn btn-primary'
 		
 		%table.table.table-striped
-			= link_to t('oldest') + "|", products_path(sort_by: 'oldest')
-			= link_to t('newest') + "|" , products_path(sort_by: 'newest')
-			= link_to t('name') + "|" , products_path(sort_by: 'name')
-			= link_to t('price') + "|", products_path(sort_by: 'price')
-			= link_to t('quantity') , products_path(sort_by: 'quantity')
-
 			%thead
 				%tr
-					%th= t("name")
-					%th= t("price")
+					%th= "category"
+					%th= sort_link @search, :name, "Product name"
+					%th= sort_link @search, :price, "Price"
 					%th= t("description")
-					%th= t("quantity")
+					%th= sort_link @search, :quantity, "Quantity"
 					%th{:colspan => "3"}
 			%tbody
 				- @products.each do |product|
 					%tr
+						%td= product.category.name
 						%td= product.name
 						%td= product.price
 						%td= product.description
@@ -54,4 +60,4 @@
 									= orders_details.submit t('add_to_cart'), class: "btn btn-primary"
 									%span= orders_details.number_field :quantity, value: 1, class: "form-control", min: 1
 									%span.price= number_to_currency(product.price)
-		= paginate @products, theme: 'twitter-bootstrap-3'						
+		= paginate @products, theme: 'twitter-bootstrap-3'			

@@ -4,11 +4,8 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = if params[:name]
-                    Category.where('name LIKE ?', "%#{params[:name]}%")
-                  else
-                    Category.page(params[:page]).per(20).order(created_at: :desc)
-                  end
+    @search = Category.ransack params[:q]
+    @categories = @search.result.page(params[:page]).per(10)
   end
 
   # GET /categories/1
