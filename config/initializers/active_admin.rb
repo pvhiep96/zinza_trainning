@@ -8,7 +8,11 @@ ActiveAdmin.setup do |config|
   config.skip_before_action :session_cart
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
-  #
+  ## Set the CSV builder separator
+  config.csv_options = { col_sep: ';' }
+
+  # Force the use of quotes
+  config.csv_options = { force_quotes: true } 
   # config.site_title_link = "/"
 
   # Set an optional image to be displayed for the header

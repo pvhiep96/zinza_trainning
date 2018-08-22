@@ -4,11 +4,12 @@ class ProductsController < ApplicationController
   before_action :user_signed_in?, only: %i[edit update show destroy create]
 
   def index
-    @products = if params[:name]
-                  Product.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
-                else
-                  Product.page(params[:page]).per(10).order_list(params[:sort_by])
-                end
+    @search = Product.ransack(params[:q])
+    @products = @search.result.includes(:category).page(params[:page]).per(10)
+    
+    # binding.pry
+    
+    @search.build_condition
   end
 
   def show

@@ -15,7 +15,7 @@ ActiveAdmin.register Product do
     panel 'Product details' do
       attributes_table_for product, :user_id, :total, :status, :created_at
     end
-
+  
     panel('Items') do
       table_for(product.pictures) do
         column 'Picture' do |i|
@@ -23,6 +23,7 @@ ActiveAdmin.register Product do
         end
       end
     end
+    text_node link_to('Download CSV', admin_products_path(resource.id))
   end
   form do |f|
     f.inputs 'New product' do
@@ -39,4 +40,27 @@ ActiveAdmin.register Product do
     end
     actions
   end
+  
+  csv do
+    column :name
+    column(:category){|product| product.category.name}
+    column :price
+    column :quantity
+    column :description
+    column :created_at
+    column :updated_at
+  end
+
+  # show do
+  #   attributes_table
+  #   text_node link_to('Download CSV', admin_products_path(resource.id))
+  # end
+
+  # member_action :show_csv do
+  #   csv = ActiveAdmin::CSVBuilder.build_from_collection(resource.questions) do
+  #     column(:name) { |r| r.name }
+  #     column(:quantity) { |r| r.quantity }
+  #     column(:description) { |r| r.description }
+  #   end
+  # end
 end

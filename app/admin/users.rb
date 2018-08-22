@@ -11,4 +11,12 @@ ActiveAdmin.register User do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  csv do
+    column :email
+    column :name
+    column :created_at
+    column :confirmed_at
+    # column(:author) { |post| post.author.full_name }
+    # column('bODY', humanize_name: false) # preserve case
+  end
 end
