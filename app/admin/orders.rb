@@ -20,16 +20,19 @@ ActiveAdmin.register Order do
       end
     end
   end
-
+  
   show do |order|
     panel 'Order details' do
-      attributes_table_for order, :user_id, :total, :status, :created_at
+      attributes_table_for order, :user, :total, :status, :created_at
     end
 
     panel('Items') do
       table_for(order.order_details) do
         column 'Name' do |i|
           i.product.name
+        end
+        column 'Seller' do |i|
+          i.product.user.name
         end
         column :quantity
         column 'Price' do |i|
@@ -39,6 +42,7 @@ ActiveAdmin.register Order do
     end
     text_node link_to('Download CSV', admin_order_path(resource.id, format: :csv))
   end
+
   csv do
     column :id
     column(:user){|order| order.user.name}

@@ -7,10 +7,10 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => "http://localhost:3000/"} Project name
+      %a.navbar-brand{:href => "http://localhost:3000/products/showall"} Project name
     #navbar.navbar-collapse.collapse
       %ul.nav.navbar-nav
-        %li= link_to t("home"), root_path, class: "active"
+        %li= link_to t("home"), products_showall_path, class: "active"
         %li
           - if user_signed_in?
             %li= link_to current_user.name, edit_user_registration_path

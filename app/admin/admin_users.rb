@@ -1,6 +1,11 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
+  controller do |order|
+    def show
+      NotifierMailer.send_mail_admin(@order).deliver
+    end
+  end
   index do
     selectable_column
     id_column

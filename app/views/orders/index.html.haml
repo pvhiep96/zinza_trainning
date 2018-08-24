@@ -3,14 +3,17 @@
     %table.table.table-striped
       %thead
         %tr
+          %th{:style => "text-align:center"}= t("user")
           %th{:style => "text-align:center"}= t("date_time")
           %th{:style => "text-align:center"}= t("total_detail")
           %th{:style => "text-align:center"}= t("status")
           %th{:colspan => "3"}
       %tbody
-        - @orders.each do |order|
+        - current_user.orders.each do |order|
           %tr
+            %td= order.user.name
             %td= order.created_at
             %td= number_to_currency order.total_price
             %td= order.status
-            %td= link_to t("detail"), order
+            %td= link_to t("detail"), detail_path(order)
+            
