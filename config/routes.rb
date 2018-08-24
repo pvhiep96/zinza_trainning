@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'orders/checkout/:id' => 'orders#checkout', as: :order_checkout
     post 'orders/update_quantity/:id' => 'order_details#update_quantity', as: :quantity
     get 'orders/detail/:id' => 'orders#detail', as: :detail
+    get 'products/showall' => 'products#showall'
     # resources :line_items, only: [:create, :update, :destroy]
     # resources :cart, only: [:show]
     resources :order_details

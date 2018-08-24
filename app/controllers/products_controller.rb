@@ -2,13 +2,10 @@ class ProductsController < ApplicationController
   # load_and_authorize_resource
   before_action :set_product, only: %i[edit update show destroy]
   before_action :user_signed_in?, only: %i[edit update show destroy create]
-
+  before_action :correct_user, only: %i[edit update]
   def index
     @search = Product.ransack(params[:q])
     @products = @search.result.includes(:category).page(params[:page]).per(10)
-    
-    # binding.pry
-    
     @search.build_condition
   end
 
@@ -42,9 +39,17 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    redirect_to products_url
-    flash[:success] = 'destroy success'
+    if current_user = @product.user
+      @product.destroy
+      redirect_to products_url
+      flash[:success] = 'destroy success'
+    end
+  end
+
+  def showall
+    @search = Product.ransack(params[:q])
+    @products = @search.result.includes(:category).page(params[:page]).per(10)
+    @search.build_condition
   end
 
   private
@@ -57,5 +62,10 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find_by(id: params[:id])
     render 'shared/_404' if @product.nil?
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
   end
 end

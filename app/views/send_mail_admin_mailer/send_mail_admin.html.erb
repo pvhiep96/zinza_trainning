@@ -1,0 +1,21 @@
+<h3><%= Date.today%></h3>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+		<th style="text-align:center">ID</th>
+		<th style="text-align:center">Total detail</th>					
+		<th colspan="3"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @orders.each do |order| %>
+		<tr>
+			<td><%= order.id %></td>
+			<td><%= order.total %></td>
+			<td>
+			</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>	

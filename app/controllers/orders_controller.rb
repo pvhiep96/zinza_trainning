@@ -4,6 +4,9 @@ class OrdersController < ApplicationController
   before_action :order_params, only: [:create]
   before_action :order_details, only: [:detail]
   def index
+    
+    
+    
     @orders = Order.where(status: 'checkout').order(created_at: :desc)
   end
 
@@ -32,7 +35,7 @@ class OrdersController < ApplicationController
     redirect_to products_path
   end
 
-  def detail; end
+  def detail;end
 
   private
 
