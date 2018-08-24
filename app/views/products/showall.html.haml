@@ -1,0 +1,43 @@
+.container
+	.row
+		-# = search_form_for @search, class: "col-md-12" do |f|
+		-# 	.form-group.col-md-2
+		-# 		= f.text_field :name_cont, placeholder: "enter name", class: "form-control"
+		-# 	.form-group.col-md2
+		-# 		= f.submit "search", class: "btn btn-primary"
+		-# = search_form_for @search, class: "col-md-12" do |f|
+		-# 	= f.condition_fields do |c|
+		-# 		.field
+		-# 			= c.attribute_fields do |a|
+		-# 				= a.attribute_select associations: [:category]
+		-# 			= c.predicate_select
+		-# 			= c.value_fields do |v|
+		-# 				= v.text_field :value
+		-# 			= link_to "remove", "#", class: "remove_fields"
+		-# 	.actions= f.submit "Search", class: "btn btn-primary"
+		= render "shared/category"
+		.col-md-10#product
+			= paginate @products, theme: 'twitter-bootstrap-3'
+			.sort
+				%tr
+					%th= sort_link @search, :name, "Product name"
+					%th= sort_link @search, :price, "Price"
+			- @products.each do |product|
+				.col-md-4.product-item
+					.image-picture= link_to image_tag(product.pictures.first.picture_url, alt: "MyInc Logo"), product if product.pictures.present?
+					.info-product
+						.product-name= product.name
+						.price= number_to_currency(product.price)
+					- if current_user == product.user
+						%span.glyphicon.glyphicon-pencil{"aria-hidden" => true}
+						%span.glyphicon-class= link_to t('edit'), edit_product_path(product)
+						%span.glyphicon.glyphicon-trash{"aria-hidden" => true}
+						%span.glyphicon.glyphicon-class= link_to t('destroy'), product, method: :delete, data: { confirm: 'Are you sure?'}
+					= form_for OrderDetail.new, remote: true do |orders_details|
+						= orders_details.hidden_field :name, value: product.name
+						= orders_details.hidden_field :price, value: product.price
+						= orders_details.hidden_field :product_id, value: product.id
+						= orders_details.number_field :quantity, value: 1, class: "form-control", min: 1
+						%br
+						= orders_details.submit t('add_to_cart'), class: "button"
+			

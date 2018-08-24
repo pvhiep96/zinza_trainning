@@ -15,7 +15,7 @@ ActiveAdmin.register Product do
     panel 'Product details' do
       attributes_table_for product, :user_id, :total, :status, :created_at
     end
-  
+
     panel('Items') do
       table_for(product.pictures) do
         column 'Picture' do |i|
@@ -40,10 +40,10 @@ ActiveAdmin.register Product do
     end
     actions
   end
-  
+
   csv do
     column :name
-    column(:category){|product| product.category.name}
+    column(:category) { |product| product.category.name }
     column :price
     column :quantity
     column :description

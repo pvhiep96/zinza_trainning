@@ -1,24 +1,21 @@
-.container.text-center
-	.col-lg-11
-		%table.table.table-striped
-			%p
-				%strong= t("name")
-				= @product.name
-			%p
-				%strong= t("category")
-				= @product.category.name
-			%p
-				%strong= t("price")
-				= @product.price
-			%p
-				%strong= t("quantity")
-				- if @product.quantity == 0 
-					0
-				- else
-					= @product.quantity
-			%p 
-				- @product.pictures.each do |picture|
-					.images_pro
-						= image_tag picture.picture_url
-		= link_to t('edit') + "|", edit_product_path(@product)
-		= link_to t('back'), products_path
+.container
+	.row
+		= render "shared/category"
+		.col-md-10#product_detail
+			.product_name
+				%h2= @product.name
+			.product_info
+				.col-md-5.product_picture= image_tag(@product.pictures.first.picture_url)
+				.col-md-7.product_description
+					%h3 Description:
+					.description
+						= @product.description
+					.price
+						= number_to_currency @product.price
+					= form_for OrderDetail.new, remote: true do |orders_details|
+						= orders_details.hidden_field :name, value: @product.name
+						= orders_details.hidden_field :price, value: @product.price
+						= orders_details.hidden_field :product_id, value: @product.id
+						= orders_details.number_field :quantity, value: 1, class: "form-control", min: 1
+						%br
+						= orders_details.submit t('add_to_cart'), class: "button"

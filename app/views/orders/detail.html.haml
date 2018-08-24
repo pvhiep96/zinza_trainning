@@ -4,6 +4,7 @@
       %thead
         %tr
           %th{:style => "text-align:center"}= t("name")
+          %th{:style => "text-align:center"}= t("seller")
           %th{:style => "text-align:center"}= t("quantity")
           %th{:style => "text-align:center"}= t("price")
           %th{:style => "text-align:center"}= t("total_detail")
@@ -12,6 +13,7 @@
         - @order.order_details.each do |order|
           %tr
             %td= order.name
+            %td= order.user.name
             %td= order.quantity
             %td
               = order.price

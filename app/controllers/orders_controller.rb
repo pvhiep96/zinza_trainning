@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :order_params, only: [:create]
   before_action :order_details, only: [:detail]
   def index
+    # @search = Order.ransack(params[:q])
     @orders = Order.where(status: 'checkout').order(created_at: :desc)
   end
 
@@ -33,6 +34,8 @@ class OrdersController < ApplicationController
   end
 
   def detail; end
+
+  def showorder; end
 
   private
 

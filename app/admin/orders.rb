@@ -11,9 +11,9 @@ ActiveAdmin.register Order do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  controller do |order|
+  controller do |_order|
     def show
-      order = Order.find_by(id: params[:id] )  
+      order = Order.find_by(id: params[:id])
       respond_to do |format|
         format.html
         format.csv { send_data order.order_details.to_csv, filename: "details-#{Date.today}.csv" }
@@ -23,13 +23,16 @@ ActiveAdmin.register Order do
 
   show do |order|
     panel 'Order details' do
-      attributes_table_for order, :user_id, :total, :status, :created_at
+      attributes_table_for order, :user, :total, :status, :created_at
     end
 
     panel('Items') do
       table_for(order.order_details) do
         column 'Name' do |i|
           i.product.name
+        end
+        column 'Seller' do |i|
+          i.product.user.name
         end
         column :quantity
         column 'Price' do |i|
@@ -39,9 +42,10 @@ ActiveAdmin.register Order do
     end
     text_node link_to('Download CSV', admin_order_path(resource.id, format: :csv))
   end
+
   csv do
     column :id
-    column(:user){|order| order.user.name}
+    column(:user) { |order| order.user.name }
     column :total
     column :status
     column :created_at
