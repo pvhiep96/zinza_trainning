@@ -1,0 +1,25 @@
+.container.text-center
+  .row
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{:style => "text-align:center"}= t("customer")
+          %th{:style => "text-align:center"}= t("product")
+          %th{:style => "text-align:center"}= t("quantity")
+          %th{:style => "text-align:center"}= t("total_detail")
+          %th{:style => "text-align:center"}= t("datet time")
+          %th{:style => "text-align:center"}= t("status")
+          %th{:colspan => "3"}
+      %tbody
+        - current_user.products.each do |p|
+          - p.order_details.each do |o|
+            %tr
+              %td= link_to o.order.user.name
+              %td= o.product.name
+              %td= o.quantity
+              %td= number_to_currency (p.price * o.quantity)
+              %td= o.order.updated_at
+              %td= o.order.status
+
+            
+

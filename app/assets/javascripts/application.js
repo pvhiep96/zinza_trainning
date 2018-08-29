@@ -60,3 +60,4 @@
       alert('Maximum file size is 5MB. Please choose a smaller file.');
     }
   });
+  

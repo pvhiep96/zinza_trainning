@@ -1,7 +1,7 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
-  controller do |order|
+  controller do |_order|
     def show
       NotifierMailer.send_mail_admin(@order).deliver
     end

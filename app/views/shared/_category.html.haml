@@ -1,0 +1,5 @@
+.col-md-2#category
+  %h3 Category
+  %ul
+    - @categories.each do |c|
+      %li= link_to c.name, category_path(c)

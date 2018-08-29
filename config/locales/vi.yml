@@ -29,7 +29,7 @@ vi:
   newest: "Mới nhất"
   search: "Tìm kiếm"
   detail: "Chi tiết"
-  create_product: "Tạo mới sản phẩm"
+  create_product: "Thêm sản phẩm"
   edit_product: "Sửa sản phẩm"
   create_category: "Tạo mới danh mục"
   edit_category: "Sửa danh mục"
@@ -44,6 +44,7 @@ vi:
   didn't_receive_confirmation_instructions?: "Không nhận được hướng dẫn xác nhận?"
   didn't_receive_unlock_instructions?: "Không nhận được hướng dẫn mở khóa?"
   image_size: "dung lượng ảnh quá 5Mb"
+  seller: "Người bán"
   time:
     formats:
       long: "%Y-%m-%d %H:%M:%S"

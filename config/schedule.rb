@@ -14,7 +14,7 @@
 # end
 #
 every 1.days, at: '5:00 pm' do
-  rake "send_email_admin"
+  rake 'send_email_admin'
 end
 
 # Learn more: http://github.com/javan/whenever

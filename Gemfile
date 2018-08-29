@@ -4,8 +4,7 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
-gem 'whenever'
-gem "ransack"
+# gem 'delayed_job_active_record'
 gem 'activeadmin'
 gem 'bootstrap-kaminari-views'
 gem 'bootstrap-sass', '~> 3.3.7'
@@ -27,6 +26,9 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'pundit'
 gem 'rails-controller-testing'
+gem 'ransack'
+gem 'sidekiq'
+gem 'whenever'
 # gem 'will_paginate', '~> 3.1.0'
 # gem 'will_paginate-bootstrap'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

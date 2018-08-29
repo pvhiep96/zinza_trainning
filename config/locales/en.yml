@@ -73,6 +73,7 @@ en:
   didn't_receive_confirmation_instructions?: "Didn't receive confirmation instructions?"
   didn't_receive_unlock_instructions?: "Didn't receive unlock instructions?"
   image_size: "should be less than 5MB"
+  seller: "Seller"
   time:
       formats:
         long: "%Y-%m-%d %H:%M:%S"

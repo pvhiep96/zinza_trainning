@@ -1,4 +1,3 @@
-
 class OrderDetail < ApplicationRecord
   belongs_to :order
   belongs_to :product
@@ -6,15 +5,14 @@ class OrderDetail < ApplicationRecord
   validates :price, presence: true
   delegate :user, to: :product
 
-
   def self.to_csv
-    attributes = %w{name quantity price seller_name}
+    attributes = %w[name quantity price seller_name]
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
       all.each do |order_detail|
-        csv << attributes.map{ |attr| order_detail.send(attr) }
+        csv << attributes.map { |attr| order_detail.send(attr) }
       end
     end
   end
